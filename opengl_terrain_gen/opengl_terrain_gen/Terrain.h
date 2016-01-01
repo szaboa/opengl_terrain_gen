@@ -1,22 +1,39 @@
 #pragma once
 #include "Vec3f.h"
+#include <vector>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include "VertexBuffer.h"
+#include "IndexBuffer.h"
+#include <iostream>
+#include <SOIL.h>
+#include "Shader.h"
+
 class Terrain
 {
 private:
 	int width; 
-	int length;
-	float** heights; 
-	Vec3f** normals;
-	bool computedNormals; //Whether normals is up-to-date
-public:
-	Terrain(int width, int length);
-	int getWidth();
-	int getLength();
+	int height;
+	int numElements;
+	VertexBuffer *vertexBuffer;
+	IndexBuffer *indexBuffer;
+	Shader *shader;
+	std::vector<Vec3f> vertices;
+	std::vector<short> indexes;
+	int calculateNumElements();
+	int rgbToGrayscale(int r, int g, int b);
+	void createVertexData(const char* imagePath);
+	void createIndexData();
 
-	void setHeight(int x, int z, float y);
-	float getHeight(int x, int z);
-	void computeNormals();
-	Vec3f getNormal(int x, int z);
+public:
+	Terrain(const char* imagePath);
+	void bindData();
+	void draw();
+	int getWidth();
+	int getHeight();
+	Shader* getShader();
+	void setUniforms(glm::mat4 matrix);
 	~Terrain();
 };
 

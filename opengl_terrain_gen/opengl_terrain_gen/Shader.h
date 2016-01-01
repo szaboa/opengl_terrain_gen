@@ -5,7 +5,7 @@
 #include <sstream>
 #include <iostream>
 
-#include <GL/glew.h>; // Include glew to get all the required OpenGL headers
+#include <GL/glew.h> // Include glew to get all the required OpenGL headers
 
 class Shader
 {
@@ -16,6 +16,6 @@ public:
 	// Constructor reads and builds the shader
 	Shader(const GLchar* vertexPath, const GLchar* fragmentPath);
 	// Use the program
-	void Use();
+	void useProgram();
 };
 

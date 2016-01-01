@@ -1,9 +1,8 @@
 #version 330 core
 
-in vec4 mycolor;
+in vec4 v_Color;
 out vec4 color;
-
 void main()
 {
-    color = mycolor;
+    color = v_Color;
 }

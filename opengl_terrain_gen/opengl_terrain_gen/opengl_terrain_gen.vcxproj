@@ -68,14 +68,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Terrain.cpp" />
+    <ClCompile Include="Vec3.cpp" />
+    <ClCompile Include="VertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Vec3f.h" />
+    <ClInclude Include="VertexBuffer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
