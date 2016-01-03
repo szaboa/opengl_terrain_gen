@@ -53,12 +53,12 @@ int main()
 	glViewport(0, 0, WIDTH, HEIGHT);
 
 
-	Terrain terrain("terrain_images/terrain_sample.bmp");
+	Terrain terrain("terrain_images/terrain_sample3.jpg");
 	glm::mat4 view;
 	glm::mat4 projection;
 	
 	
-	//projection = glm::perspective(45.0f, (GLfloat)WIDTH / (GLfloat)HEIGHT, 0.1f, 100.0f);
+	projection = glm::perspective(45.0f, (GLfloat)WIDTH / (GLfloat)HEIGHT, 0.1f, 100.0f);
 
 	
 	
@@ -73,13 +73,13 @@ int main()
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		//glm::mat4 model = glm::scale(model, glm::vec3(100.0f, 10.0f, 100.0f));
+		glm::mat4 model = glm::scale(model, glm::vec3(100.0f, 10.0f, 100.0f));
 		//view = glm::rotate(view, 90, glm::vec3(1.0f, 1.0f, 1.0f));
-		//view = glm::translate(view, glm::vec3(0.0f, -9.0f, -3.0f));
-		//glm::mat4 u_Matrix = view;
+		view = glm::translate(view, glm::vec3(0.0f, 10.0f, -10.0f));
+		glm::mat4 u_Matrix = projection*view*model;
 		//std::cout << u_Matrix[0];
 		terrain.getShader()->useProgram();
-		//terrain.setUniforms(u_Matrix);
+		terrain.setUniforms(u_Matrix);
 		terrain.bindData();
 		terrain.draw();
 		

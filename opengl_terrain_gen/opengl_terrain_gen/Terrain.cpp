@@ -10,18 +10,9 @@ Terrain::Terrain(const char* imagePath){
 
 	std::cout << "num elements: " << numElements << std::endl;
 
+
 	vertexBuffer = new VertexBuffer(vertices);
 	indexBuffer = new IndexBuffer(indexes);
-
-	std::cout << "Vertices: " << std::endl;
-	for (Vec3f x : vertices){
-		//std::cout << x << std::endl;
-	}
-
-	std::cout << "Indexes: " << std::endl;
-	for (short x : indexes){
-		//std::cout << vertices.at(x) << std::endl;
-	}
 
 	shader = new Shader("shaders/heightmap_vertex_shader.glsl", "shaders/heightmap_fragment_shader.glsl");
 
@@ -47,11 +38,13 @@ void Terrain::bindData(){
 
 void Terrain::draw(){
 	// use shader
-	glBindVertexArray(vertexBuffer->getVAO());
+
+	//glBindVertexArray(vertexBuffer->getVAO());
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer->getBufferId());
-	glDrawElements(GL_TRIANGLES, numElements, GL_UNSIGNED_SHORT, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
+	glDrawElements(GL_TRIANGLES, indexes.size(), GL_UNSIGNED_SHORT, 0);
+	//glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+	//	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glDisableVertexAttribArray(0);
 }
 
 int Terrain::calculateNumElements(){

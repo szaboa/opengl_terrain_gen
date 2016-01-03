@@ -12,7 +12,7 @@ private:
 public:
 	VertexBuffer(std::vector<Vec3f> vertices);
 	void setVertexAttribPointer(int dataOffset, int attributeLocation, int componentCount, int stride);
-
+	GLuint getBufferId();
 	GLuint getVAO();
 	~VertexBuffer();
 };
