@@ -33,7 +33,7 @@ public:
 	int getWidth();
 	int getHeight();
 	Shader* getShader();
-	void setUniforms(glm::mat4 matrix);
+	void setUniforms(glm::mat4 model, glm::mat4 view, glm::mat4 projection);
 	~Terrain();
 };
 

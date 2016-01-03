@@ -22,10 +22,17 @@ Shader* Terrain::getShader(){
 	return shader;
 }
 
-void Terrain::setUniforms(glm::mat4 matrix){
-	//std::cout << matrix.x;
-	GLint u_MatrixLoc = glGetUniformLocation(shader->Program, "u_Matrix");
-	glUniformMatrix4fv(u_MatrixLoc, 1, GL_FALSE, glm::value_ptr(matrix));
+void Terrain::setUniforms(glm::mat4 model, glm::mat4 view, glm::mat4 projection){
+
+	GLint modelLoc = glGetUniformLocation(shader->Program, "model");
+	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+
+	//pass view matrix
+	GLint viewLoc = glGetUniformLocation(shader->Program, "view");
+	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+
+	GLint projLoc = glGetUniformLocation(shader->Program, "projection");
+	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 }
 
 void Terrain::bindData(){
