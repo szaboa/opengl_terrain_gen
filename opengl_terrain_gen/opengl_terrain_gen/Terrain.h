@@ -1,5 +1,4 @@
 #pragma once
-#include "Vec3f.h"
 #include <vector>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -19,7 +18,7 @@ private:
 	VertexBuffer *vertexBuffer;
 	IndexBuffer *indexBuffer;
 	Shader *shader;
-	std::vector<Vec3f> vertices;
+	std::vector<glm::vec3> vertices;
 	std::vector<short> indexes;
 	int calculateNumElements();
 	int rgbToGrayscale(int r, int g, int b);

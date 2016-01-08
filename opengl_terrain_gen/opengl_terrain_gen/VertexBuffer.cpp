@@ -1,14 +1,14 @@
 #include "VertexBuffer.h"
 
-VertexBuffer::VertexBuffer(std::vector<Vec3f> vertices)
+VertexBuffer::VertexBuffer(std::vector<glm::vec3> vertices)
 {
-	std::cout << "Number of vertices: " << vertices.size() << std::endl;
+	
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 	glGenBuffers(1, &bufferId);
 	
 	glBindBuffer(GL_ARRAY_BUFFER, bufferId);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size()*sizeof(Vec3f), &vertices.front(), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size()*sizeof(glm::vec3), &vertices.front(), GL_STATIC_DRAW);
 	
 	//glBindBuffer(GL_ARRAY_BUFFER, 0);
 	//glBindVertexArray(0);

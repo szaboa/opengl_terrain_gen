@@ -2,7 +2,6 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <vector>
-#include "Vec3f.h"
 class IndexBuffer
 {
 private:

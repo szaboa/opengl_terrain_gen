@@ -71,7 +71,7 @@ void Terrain::createVertexData(const char* imagePath){
 			float ypos = (float)gValue / (float)255;
 			float zpos = ((float)row / (float)(height - 1)) - 0.5f;
 
-			vertices.push_back(Vec3f(xpos, ypos, zpos));
+			vertices.push_back(glm::vec3(xpos, ypos, zpos));
 			//std::cout << Vec3f(xpos, ypos, zpos) << std::endl;
 		}
 	}
