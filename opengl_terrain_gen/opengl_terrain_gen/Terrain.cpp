@@ -10,6 +10,10 @@ Terrain::Terrain(const char* imagePath){
 
 	std::cout << "num elements: " << numElements << std::endl;
 
+	if (width == 0 || height == 0){
+		std::cout << "Image loading failed";
+		return;
+	}
 
 	vertexBuffer = new VertexBuffer(vertices);
 	indexBuffer = new IndexBuffer(indexes);

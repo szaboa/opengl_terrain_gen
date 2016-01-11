@@ -20,7 +20,6 @@
 // Function prototypes
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void do_movement();
 
 // Window dimensions
@@ -62,8 +61,6 @@ int main()
 	// Set the required callback functions
 	glfwSetKeyCallback(window, key_callback);
 	glfwSetCursorPosCallback(window, mouse_callback);
-	glfwSetScrollCallback(window, scroll_callback);
-
 	// GLFW Options
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
@@ -80,48 +77,52 @@ int main()
 	glViewport(0, 0, WIDTH, HEIGHT);
 
 
-	Terrain terrain("terrain_images/terrain_sample5.png");
-	glm::mat4 view;
-	glm::mat4 projection;
-	
-	
-	projection = glm::perspective(45.0f, (GLfloat)WIDTH / (GLfloat)HEIGHT, 0.1f, 100.0f);
+	Terrain terrain("terrain_images/terrain_sample4.jpg");
 
-	
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	// Game loop
-	while (!glfwWindowShouldClose(window))
-	{
-		// Calculate deltatime of current frame
-		GLfloat currentFrame = glfwGetTime();
-		deltaTime = currentFrame - lastFrame;
-		lastFrame = currentFrame;
+	if (terrain.getHeight() != 0 && terrain.getWidth() != 0){
 
-		// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
-		glfwPollEvents();
-		do_movement();
-
-		// Render
-		// Clear the colorbuffer
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		// Create camera transformations
 		glm::mat4 view;
-		view = camera.GetViewMatrix();
-		glm::mat4 projection = glm::perspective(camera.Zoom, (GLfloat)WIDTH / (GLfloat)HEIGHT, 0.1f, 100.0f);
-		glm::mat4 model = glm::scale(model, glm::vec3(2.0f, 1.0f, 2.0f));
-		
+		glm::mat4 projection;
 
-		terrain.getShader()->useProgram();
 
-		terrain.setUniforms(model, view, projection);
-		terrain.bindData();
+		projection = glm::perspective(45.0f, (GLfloat)WIDTH / (GLfloat)HEIGHT, 0.1f, 100.0f);
 
-		terrain.draw();
-		
-		// Swap the screen buffers
-		glfwSwapBuffers(window);
+
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		// Game loop
+		while (!glfwWindowShouldClose(window))
+		{
+			// Calculate deltatime of current frame
+			GLfloat currentFrame = glfwGetTime();
+			deltaTime = currentFrame - lastFrame;
+			lastFrame = currentFrame;
+
+			// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
+			glfwPollEvents();
+			do_movement();
+
+			// Render
+			// Clear the colorbuffer
+			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+			// Create camera transformations
+			glm::mat4 view;
+			view = camera.GetViewMatrix();
+			glm::mat4 projection = glm::perspective(camera.Zoom, (GLfloat)WIDTH / (GLfloat)HEIGHT, 0.1f, 100.0f);
+			glm::mat4 model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+
+
+			terrain.getShader()->useProgram();
+
+			terrain.setUniforms(model, view, projection);
+			terrain.bindData();
+
+			terrain.draw();
+
+			// Swap the screen buffers
+			glfwSwapBuffers(window);
+		}
 	}
 
 	// Terminate GLFW, clearing any resources allocated by GLFW.
@@ -173,9 +174,4 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 	lastY = ypos;
 
 	camera.ProcessMouseMovement(xoffset, yoffset);
-}
-
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
-{
-	camera.ProcessMouseScroll(yoffset);
 }
