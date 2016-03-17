@@ -1,5 +1,5 @@
 # Terrain generation in OpenGL(3.3)
-This project is about generation a heightmap-based terrain, in OpenGL 3.3 (C++). It's basically draws the surface with triangle strips, using a vertex buffer, and also an index buffer.
+Heightmap-based terrain generation, in OpenGL 3.3 (C++). It's basically draws the surface with triangle strips, using a vertex buffer, and an index buffer.
 
 ###I have used the following libraries:
 * [**glfw**](http://www.glfw.org/) (creating windows with OpenGL contexts and receiving input and events)
